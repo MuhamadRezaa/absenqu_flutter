@@ -10,9 +10,23 @@ import 'package:absenqu_flutter/screens/karyawan/karyawan_screen.dart';
 import 'package:absenqu_flutter/screens/karyawan/karyawan_chat_screen.dart';
 import 'package:absenqu_flutter/screens/karyawan/karyawan_textChat_screen.dart';
 import 'package:absenqu_flutter/screens/splash_screen.dart';
+import 'package:absenqu_flutter/screens/absenlembur/absenlembur.dart';
+import 'package:absenqu_flutter/screens/absenlembur/detail_absenlembur.dart';
+import 'package:absenqu_flutter/screens/izin/detail_ajukanizin.dart';
+import 'package:absenqu_flutter/screens/izin/form_ajukanizin.dart';
+import 'package:absenqu_flutter/screens/izin/izin_ajukanizin.dart';
+import 'package:absenqu_flutter/screens/izin/proses_ajukanizin.dart';
+import 'package:absenqu_flutter/screens/lembur/lembur.dart';
+import 'package:absenqu_flutter/screens/lembur/surat_tugas_lembur.dart';
+import 'package:absenqu_flutter/screens/slipgaji/slipgaji.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+import 'package:intl/date_symbol_data_local.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await initializeDateFormatting('id_ID', null);
+  debugPaintSizeEnabled = false;
   runApp(const MyApp());
 }
 
@@ -28,6 +42,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'AbsenQu',
       theme: ThemeData(
+        //fontFamily: 'Kumbh Sans',
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
       debugShowCheckedModeBanner: false,
@@ -39,7 +54,8 @@ class MyApp extends StatelessWidget {
         '/splash': (context) => const SplashScreen(),
         '/profile': (context) => const ProfileScreen(),
         '/profile_karyawan': (context) => const ProfileKaryawanScreen(),
-        '/karyawan_textChat': (context) => const ChatKaryawan(namaPegawai: null, fotoPegawai: null,),
+        '/karyawan_textChat': (context) =>
+            const ChatKaryawan(namaPegawai: null, fotoPegawai: null),
         '/karyawan_chat': (context) => const DataChatPegawai(),
         '/karyawan': (context) => const DataPegawaiPage(),
         '/PseanPegawai': (context) => PseanPegawaiScreen(),
@@ -49,7 +65,22 @@ class MyApp extends StatelessWidget {
         '/absen_masuk4': (context) => const AbsenMasuk4Screen(),
         '/absen_masuk_bulanan': (context) => const AbsenMasukBulananScreen(),
 
-        
+        // IZIN
+        '/ajukanizin': (context) => const AjukanIzin(),
+        '/form_ajukanizin': (context) => const FormAjukanizin(),
+        '/proses_ajukanizin': (context) => const ProsesAjukanIzin(),
+        '/detail_ajukanizin': (context) => const DetailAjukanIzin(),
+
+        // LEMBUR
+        '/lembur': (context) => const Lembur(),
+        '/surat_tugas_lembur': (context) => const SuratTugasLembur(),
+
+        // ABSEN LEMBUR
+        '/absenlembur': (context) => const Absenlembur(),
+        '/detail_absenlembur': (context) => const DetailAbsenLembur(),
+
+        // SLIP GAJI
+        '/slipgaji': (context) => const SlipGaji(),
       },
     );
   }
