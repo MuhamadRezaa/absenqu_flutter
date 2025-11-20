@@ -1,18 +1,13 @@
 import 'package:flutter/material.dart';
 
-// pastikan file ini ada dan terdaftar di route
-// contoh:
-// '/PseanPegawai': (context) => const PseanPegawaiScreen(),
-// '/karyawan_textChat': (context) => const KaryawanTextChatScreen(),
-
-class DataChatPegawai extends StatefulWidget {
-  const DataChatPegawai({super.key});
+class PseanPegawaiScreen extends StatefulWidget {
+  const PseanPegawaiScreen({super.key});
 
   @override
-  State<DataChatPegawai> createState() => _DataChatPegawaiState();
+  State<PseanPegawaiScreen> createState() => _PseanPegawaiScreenState();
 }
 
-class _DataChatPegawaiState extends State<DataChatPegawai> {
+class _PseanPegawaiScreenState extends State<PseanPegawaiScreen> {
   final TextEditingController _searchController = TextEditingController();
 
   final List<Map<String, dynamic>> pegawaiList = [
@@ -21,25 +16,22 @@ class _DataChatPegawaiState extends State<DataChatPegawai> {
       "jabatan": "Staf Marketing",
       "lokasi": "Kantor Cabang Ringroad",
       "foto": "assets/images/Pegawai1.png",
+      "unread": 1, // jumlah chat belum dibaca
     },
     {
-      "nama": "Sany Pratama",
-      "jabatan": "Staf Marketing",
-      "lokasi": "Kantor Cabang Ringroad",
+      "nama": "Sari Rahmadani",
+      "jabatan": "Staf Keuangan",
+      "lokasi": "Kantor Pusat Padang",
       "foto": "assets/images/Pegawai2.png",
+      "unread": 0,
     },
-    {
-      "nama": "Budi Santoso",
-      "jabatan": "Supervisor Lapangan",
-      "lokasi": "Kantor Pusat Medan",
-      "foto": "assets/images/Pegawai1.png",
-    },
-    {
-      "nama": "Lina Hartati",
-      "jabatan": "Admin Keuangan",
-      "lokasi": "Kantor Cabang Binjai",
-      "foto": "assets/images/Pegawai2.png",
-    },
+    // {
+    //   "nama": "Budi Santoso",
+    //   "jabatan": "Customer Support",
+    //   "lokasi": "Cabang Bukittinggi",
+    //   "foto": "assets/images/Pegawai3.png",
+    //   "unread": 2,
+    // },
   ];
 
   List<Map<String, dynamic>> filteredList = [];
@@ -199,7 +191,7 @@ class _DataChatPegawaiState extends State<DataChatPegawai> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               const Text(
-                                'Data Pegawai',
+                                'Pesan Pegawai',
                                 style: TextStyle(
                                   fontSize: 17,
                                   fontWeight: FontWeight.bold,
@@ -207,8 +199,10 @@ class _DataChatPegawaiState extends State<DataChatPegawai> {
                               ),
                               GestureDetector(
                                 onTap: () {
-                                  // 🔹 Arahkan ke halaman PseanPegawai
-                                  Navigator.pushNamed(context, '/PseanPegawai');
+                                  Navigator.pushNamed(
+                                    context,
+                                    '/karyawan_textChat',
+                                  );
                                 },
                                 child: Stack(
                                   clipBehavior: Clip.none,
@@ -228,7 +222,7 @@ class _DataChatPegawaiState extends State<DataChatPegawai> {
                                         ),
                                       ),
                                       child: const Text(
-                                        "Chat",
+                                        "Pesan",
                                         style: TextStyle(
                                           color: Colors.black,
                                           fontWeight: FontWeight.bold,
@@ -347,28 +341,56 @@ class _DataChatPegawaiState extends State<DataChatPegawai> {
                                         ),
                                       ),
 
-                                      // Tombol Chat di kanan tiap item
-                                      GestureDetector(
-                                        onTap: () {
-                                          // 🔹 Tetap ke halaman karyawan_textChat
-                                          Navigator.pushNamed(
-                                            context,
-                                            '/karyawan_textChat',
-                                          );
-                                        },
-                                        child: Container(
-                                          padding: const EdgeInsets.all(6),
-                                          decoration: const BoxDecoration(
-                                            color: Color(0xFF0B5408),
-                                            shape: BoxShape.circle,
+                                      // Tombol Chat dengan notifikasi
+                                      Stack(
+                                        clipBehavior: Clip.none,
+                                        children: [
+                                          GestureDetector(
+                                            onTap: () {
+                                              Navigator.pushNamed(
+                                                context,
+                                                '/karyawan_textChat',
+                                              );
+                                            },
+                                            child: Container(
+                                              padding: const EdgeInsets.all(6),
+                                              decoration: const BoxDecoration(
+                                                color: Color(0xFF0B5408),
+                                                shape: BoxShape.circle,
+                                              ),
+                                              child: Image.asset(
+                                                'assets/images/Chat.png',
+                                                width: 22,
+                                                height: 22,
+                                                color: Colors.white,
+                                              ),
+                                            ),
                                           ),
-                                          child: Image.asset(
-                                            'assets/images/Chat.png',
-                                            width: 22,
-                                            height: 22,
-                                            color: Colors.white,
-                                          ),
-                                        ),
+
+                                          // 🔴 Badge notifikasi merah
+                                          if ((data["unread"] ?? 0) > 0)
+                                            Positioned(
+                                              right: -2,
+                                              top: -2,
+                                              child: Container(
+                                                padding: const EdgeInsets.all(
+                                                  4,
+                                                ),
+                                                decoration: const BoxDecoration(
+                                                  color: Colors.red,
+                                                  shape: BoxShape.circle,
+                                                ),
+                                                child: Text(
+                                                  '${data["unread"]}',
+                                                  style: const TextStyle(
+                                                    color: Colors.white,
+                                                    fontSize: 9,
+                                                    fontWeight: FontWeight.bold,
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                        ],
                                       ),
                                     ],
                                   ),

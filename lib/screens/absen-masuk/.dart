@@ -58,9 +58,10 @@ class _AbsenMasukScreen1State extends State<AbsenMasukScreen1> {
     final tanggalBulan = DateFormat('d MMMM', 'id_ID').format(now);
     final tahun = DateFormat('yyyy', 'id_ID').format(now);
     final args = ModalRoute.of(context)?.settings.arguments as Map?;
-    if (args != null && args['selectedMonthIndex'] != null) {
-      _selectedMonthIndex = args['selectedMonthIndex'];
-    }
+if (args != null && args['selectedMonthIndex'] != null) {
+  _selectedMonthIndex = args['selectedMonthIndex'];
+}
+
 
     final hijri = HijriCalendar.fromDate(now);
     final tanggalHijriah = '${hijri.hDay}';
@@ -242,8 +243,7 @@ class _AbsenMasukScreen1State extends State<AbsenMasukScreen1> {
                 // === AREA KONTEN ===
                 Expanded(
                   child: SingleChildScrollView(
-                    // increase bottom padding so final translated container is reachable
-                    padding: const EdgeInsets.only(top: 30, bottom: 0),
+                    padding: const EdgeInsets.only(top: 30, bottom: 60),
                     child: Column(
                       children: [
                         InfoContainer(
@@ -393,10 +393,9 @@ class _MonthCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Color bgColor = label == "Jan"
-        ? const Color(0xFFFFF9C4) // kuning lembut untuk Januari
-        : const Color(0xFFDFF8F8); // biru muda untuk lainnya
-
+    final Color bgColor = isSelected
+        ? const Color(0xFFFFF9C4)
+        : const Color(0xFFDFF8F8);
     return GestureDetector(
       onTap: onTap,
       child: AnimatedContainer(
@@ -498,20 +497,13 @@ class InfoContainer extends StatelessWidget {
                   ),
                 ],
               ),
-              InkWell(
-                borderRadius: BorderRadius.circular(50),
-                onTap: () {
-                  Navigator.pushNamed(context, '/absen_masuk_bulanan');
-                },
-                child: const Icon(
-                  Icons.arrow_forward,
-                  size: 22,
-                  color: Color(0xFF373643),
-                ),
+              const Icon(
+                Icons.arrow_forward,
+                size: 22,
+                color: Color(0xFF373643),
               ),
             ],
           ),
-
           const SizedBox(height: 16),
           ...items,
         ],

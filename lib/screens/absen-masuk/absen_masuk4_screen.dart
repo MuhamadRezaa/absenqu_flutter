@@ -4,15 +4,15 @@ import 'package:hijri/hijri_calendar.dart';
 import 'package:intl/intl.dart';
 import 'package:intl/date_symbol_data_local.dart';
 
-class AbsenMasukScreen1 extends StatefulWidget {
-  const AbsenMasukScreen1({super.key});
+class AbsenMasuk4Screen extends StatefulWidget {
+  const AbsenMasuk4Screen({super.key});
 
   @override
-  State<AbsenMasukScreen1> createState() => _AbsenMasukScreen1State();
+  State<AbsenMasuk4Screen> createState() => _AbsenMasuk4ScreenState();
 }
 
-class _AbsenMasukScreen1State extends State<AbsenMasukScreen1> {
-  int _selectedMonthIndex = -1;
+class _AbsenMasuk4ScreenState extends State<AbsenMasuk4Screen> {
+  int _selectedMonthIndex = 0;
   late Timer _timer;
   String _currentTime = '';
 
@@ -57,7 +57,7 @@ class _AbsenMasukScreen1State extends State<AbsenMasukScreen1> {
     final now = DateTime.now();
     final tanggalBulan = DateFormat('d MMMM', 'id_ID').format(now);
     final tahun = DateFormat('yyyy', 'id_ID').format(now);
-    final args = ModalRoute.of(context)?.settings.arguments as Map?;
+    final args = ModalRoute.of(context)!.settings.arguments as Map?;
     if (args != null && args['selectedMonthIndex'] != null) {
       _selectedMonthIndex = args['selectedMonthIndex'];
     }
@@ -219,18 +219,27 @@ class _AbsenMasukScreen1State extends State<AbsenMasukScreen1> {
                         number: m['num']!,
                         isSelected: _selectedMonthIndex == index,
                         onTap: () {
-                          // Simpan bulan terpilih
                           setState(() {
                             _selectedMonthIndex = index;
                           });
 
-                          // Delay biar warna kuning muncul dulu
+                          // 🔹 Delay sedikit biar highlight kuning muncul dulu
                           Future.delayed(const Duration(milliseconds: 150), () {
-                            Navigator.pushNamed(
-                              context,
-                              '/absen_masuk${index + 1}', // otomatis: /absen_masuk1, /absen_masuk2, dst
-                              arguments: {'selectedMonthIndex': index},
-                            );
+                            if (index == 4) {
+                              // Tetap ke halaman berikutnya
+                              Navigator.pushNamed(
+                                context,
+                                '/absen_masuk3',
+                                arguments: {'selectedMonthIndex': index},
+                              );
+                            } else {
+                              // Selain itu, kembali ke halaman awal
+                              Navigator.pushNamed(
+                                context,
+                                '/absen_masuk',
+                                arguments: {'selectedMonthIndex': index},
+                              );
+                            }
                           });
                         },
                       );
@@ -242,7 +251,6 @@ class _AbsenMasukScreen1State extends State<AbsenMasukScreen1> {
                 // === AREA KONTEN ===
                 Expanded(
                   child: SingleChildScrollView(
-                    // increase bottom padding so final translated container is reachable
                     padding: const EdgeInsets.only(top: 30, bottom: 0),
                     child: Column(
                       children: [
@@ -262,22 +270,6 @@ class _AbsenMasukScreen1State extends State<AbsenMasukScreen1> {
                               lokasi:
                                   "Jalan Ringroad Komplek OCBC Toko Cabang Ringroad",
                             ),
-                            AbsensiField(
-                              tanggal: "02 Januari 2025",
-                              jam: "07.35",
-                              status: "TIDAK SESUAI",
-                              poin: -5,
-                              lokasi:
-                                  "Jalan Ringroad Komplek OCBC Toko Cabang Ringroad",
-                            ),
-                            AbsensiField(
-                              tanggal: "03 Januari 2025",
-                              jam: "07.55",
-                              status: "SESUAI",
-                              poin: 10,
-                              lokasi:
-                                  "Jalan Ringroad Komplek OCBC Toko Cabang Ringroad",
-                            ),
                           ],
                         ),
                         Transform.translate(
@@ -289,32 +281,7 @@ class _AbsenMasukScreen1State extends State<AbsenMasukScreen1> {
                               Color(0xFFD6DFE8),
                               Color(0xFFBFC3C8),
                             ],
-                            items: const [
-                              AbsensiField(
-                                tanggal: "01 Januari 2025",
-                                jam: "17.35",
-                                status: "SESUAI",
-                                poin: 10,
-                                lokasi:
-                                    "Jalan Ringroad Komplek OCBC Toko Cabang Ringroad",
-                              ),
-                              AbsensiField(
-                                tanggal: "02 Januari 2025",
-                                jam: "17.35",
-                                status: "SESUAI",
-                                poin: 10,
-                                lokasi:
-                                    "Jalan Ringroad Komplek OCBC Toko Cabang Ringroad",
-                              ),
-                              AbsensiField(
-                                tanggal: "03 Januari 2025",
-                                jam: "17.10",
-                                status: "TIDAK SESUAI",
-                                poin: -5,
-                                lokasi:
-                                    "Jalan Ringroad Komplek OCBC Toko Cabang Ringroad",
-                              ),
-                            ],
+                            items: const [],
                           ),
                         ),
                         Transform.translate(
@@ -326,14 +293,7 @@ class _AbsenMasukScreen1State extends State<AbsenMasukScreen1> {
                               Color(0xFFD9D7E1),
                               Color(0xFFC7C5CC),
                             ],
-                            items: const [
-                              IzinField(
-                                jenisIzin: "Izin Sakit",
-                                rentangWaktu: "1 Maret – 3 Maret 2025",
-                                tanggalPengajuan: "Senin, 1 April 2025",
-                                status: "DITERIMA",
-                              ),
-                            ],
+                            items: const [],
                           ),
                         ),
                         Transform.translate(
@@ -393,7 +353,7 @@ class _MonthCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Color bgColor = label == "Jan"
+    final Color bgColor = label == "Apr"
         ? const Color(0xFFFFF9C4) // kuning lembut untuk Januari
         : const Color(0xFFDFF8F8); // biru muda untuk lainnya
 

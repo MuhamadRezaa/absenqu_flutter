@@ -1,18 +1,13 @@
 import 'package:flutter/material.dart';
 
-// pastikan file ini ada dan terdaftar di route
-// contoh:
-// '/PseanPegawai': (context) => const PseanPegawaiScreen(),
-// '/karyawan_textChat': (context) => const KaryawanTextChatScreen(),
-
-class DataChatPegawai extends StatefulWidget {
-  const DataChatPegawai({super.key});
+class DataPegawaiPage extends StatefulWidget {
+  const DataPegawaiPage({super.key});
 
   @override
-  State<DataChatPegawai> createState() => _DataChatPegawaiState();
+  State<DataPegawaiPage> createState() => _DataPegawaiPageState();
 }
 
-class _DataChatPegawaiState extends State<DataChatPegawai> {
+class _DataPegawaiPageState extends State<DataPegawaiPage> {
   final TextEditingController _searchController = TextEditingController();
 
   final List<Map<String, dynamic>> pegawaiList = [
@@ -20,25 +15,49 @@ class _DataChatPegawaiState extends State<DataChatPegawai> {
       "nama": "Rudi Admojo",
       "jabatan": "Staf Marketing",
       "lokasi": "Kantor Cabang Ringroad",
+      "telepon": "081197775554",
+      "lamaKerja": "1 Tahun 2 Bulan",
       "foto": "assets/images/Pegawai1.png",
     },
     {
       "nama": "Sany Pratama",
       "jabatan": "Staf Marketing",
       "lokasi": "Kantor Cabang Ringroad",
+      "telepon": "08116578945",
+      "lamaKerja": "1 Tahun 2 Bulan",
       "foto": "assets/images/Pegawai2.png",
     },
     {
       "nama": "Budi Santoso",
       "jabatan": "Supervisor Lapangan",
       "lokasi": "Kantor Pusat Medan",
-      "foto": "assets/images/Pegawai1.png",
+      "telepon": "081234567890",
+      "lamaKerja": "2 Tahun 5 Bulan",
+      "foto": "assets/images/Pegawai1.png", // pastikan file ini ada
     },
     {
       "nama": "Lina Hartati",
       "jabatan": "Admin Keuangan",
       "lokasi": "Kantor Cabang Binjai",
-      "foto": "assets/images/Pegawai2.png",
+      "telepon": "081312345678",
+      "lamaKerja": "3 Tahun",
+      "foto": "assets/images/Pegawai2.png", // pastikan file ini ada
+    },
+    {
+      "nama": "Budi Santoso",
+      "jabatan": "Supervisor Lapangan",
+      "lokasi": "Kantor Pusat Medan",
+      "telepon": "081234567890",
+      "lamaKerja": "2 Tahun 5 Bulan",
+      "foto": "assets/images/Pegawai1.png", // pastikan file ini ada
+    },
+    {
+      "nama": "Budi Santoso",
+      "jabatan": "Supervisor Lapangan",
+      "lokasi": "Kantor Pusat Medan",
+      "telepon": "081234567890",
+      "lamaKerja": "2 Tahun 5 Bulan",
+      "foto": "assets/images/Pegawai1.png", // pastikan file ini ada
     },
   ];
 
@@ -86,11 +105,10 @@ class _DataChatPegawaiState extends State<DataChatPegawai> {
         ),
         child: Stack(
           children: [
-            // Background atas
             Container(
               height: 140,
               decoration: BoxDecoration(
-                color: const Color(0xFFEAD9FF),
+                color: const Color(0xFFFDF6B0),
                 borderRadius: const BorderRadius.only(
                   bottomRight: Radius.circular(40),
                 ),
@@ -108,7 +126,7 @@ class _DataChatPegawaiState extends State<DataChatPegawai> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // Tombol kembali & logo
+                  // Tombol kembali dan logo
                   Padding(
                     padding: const EdgeInsets.symmetric(
                       horizontal: 45,
@@ -146,7 +164,10 @@ class _DataChatPegawaiState extends State<DataChatPegawai> {
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 20),
                       child: Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 6),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 6,
+                          vertical: 0,
+                        ),
                         decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(30),
@@ -171,7 +192,7 @@ class _DataChatPegawaiState extends State<DataChatPegawai> {
                   ),
                   const SizedBox(height: 20),
 
-                  // Kontainer utama
+                  // Kontainer data pegawai
                   Expanded(
                     child: Container(
                       margin: const EdgeInsets.symmetric(horizontal: 20),
@@ -194,80 +215,20 @@ class _DataChatPegawaiState extends State<DataChatPegawai> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          // Baris atas: Data Pegawai + Chat global
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              const Text(
-                                'Data Pegawai',
-                                style: TextStyle(
-                                  fontSize: 17,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              GestureDetector(
-                                onTap: () {
-                                  // 🔹 Arahkan ke halaman PseanPegawai
-                                  Navigator.pushNamed(context, '/PseanPegawai');
-                                },
-                                child: Stack(
-                                  clipBehavior: Clip.none,
-                                  children: [
-                                    Container(
-                                      padding: const EdgeInsets.only(
-                                        left: 46,
-                                        right: 16,
-                                        top: 8,
-                                        bottom: 8,
-                                      ),
-                                      decoration: BoxDecoration(
-                                        color: const Color(0xFFCAF5F3),
-                                        borderRadius: BorderRadius.circular(30),
-                                        border: Border.all(
-                                          color: Colors.white.withOpacity(0.6),
-                                        ),
-                                      ),
-                                      child: const Text(
-                                        "Chat",
-                                        style: TextStyle(
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 13,
-                                        ),
-                                      ),
-                                    ),
-                                    Positioned(
-                                      left: -10,
-                                      top: -3,
-                                      bottom: -3,
-                                      child: Container(
-                                        padding: const EdgeInsets.all(7),
-                                        decoration: const BoxDecoration(
-                                          color: Color(0xFF0B5408),
-                                          shape: BoxShape.circle,
-                                        ),
-                                        child: Image.asset(
-                                          'assets/images/Chat.png',
-                                          width: 25,
-                                          height: 24,
-                                          color: Colors.white,
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
+                          const Text(
+                            'Data Pegawai',
+                            style: TextStyle(
+                              fontSize: 17,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
-
                           const SizedBox(height: 10),
-
-                          // List Pegawai + tombol chat per item
                           Expanded(
                             child: ListView.builder(
                               itemCount: filteredList.length,
                               itemBuilder: (context, index) {
                                 final data = filteredList[index];
+
                                 return Container(
                                   margin: const EdgeInsets.symmetric(
                                     vertical: 5,
@@ -301,6 +262,8 @@ class _DataChatPegawaiState extends State<DataChatPegawai> {
                                         ),
                                       ),
                                       const SizedBox(width: 10),
+
+                                      // Foto (aman dari error)
                                       Opacity(
                                         opacity: 0.9, // misal 90% terlihat
                                         child: CircleAvatar(
@@ -317,6 +280,8 @@ class _DataChatPegawaiState extends State<DataChatPegawai> {
                                       ),
 
                                       const SizedBox(width: 10),
+
+                                      // Info kiri
                                       Expanded(
                                         child: Column(
                                           crossAxisAlignment:
@@ -347,28 +312,26 @@ class _DataChatPegawaiState extends State<DataChatPegawai> {
                                         ),
                                       ),
 
-                                      // Tombol Chat di kanan tiap item
-                                      GestureDetector(
-                                        onTap: () {
-                                          // 🔹 Tetap ke halaman karyawan_textChat
-                                          Navigator.pushNamed(
-                                            context,
-                                            '/karyawan_textChat',
-                                          );
-                                        },
-                                        child: Container(
-                                          padding: const EdgeInsets.all(6),
-                                          decoration: const BoxDecoration(
-                                            color: Color(0xFF0B5408),
-                                            shape: BoxShape.circle,
+                                      // Info kanan
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.end,
+                                        children: [
+                                          Text(
+                                            data["telepon"],
+                                            style: const TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 11,
+                                            ),
                                           ),
-                                          child: Image.asset(
-                                            'assets/images/Chat.png',
-                                            width: 22,
-                                            height: 22,
-                                            color: Colors.white,
+                                          Text(
+                                            data["lamaKerja"],
+                                            style: const TextStyle(
+                                              fontSize: 10,
+                                              color: Colors.black54,
+                                            ),
                                           ),
-                                        ),
+                                        ],
                                       ),
                                     ],
                                   ),
