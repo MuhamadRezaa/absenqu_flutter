@@ -3,6 +3,7 @@ import 'package:absenqu_flutter/screens/absen-masuk/absen_masuk_bulanan_screen.d
 import 'package:absenqu_flutter/screens/absen-masuk/absen_masuk3_screen.dart';
 import 'package:absenqu_flutter/screens/absen-masuk/absen_masuk4_screen.dart';
 import 'package:absenqu_flutter/screens/absen-masuk/absen_masuk_screen1.dart';
+import 'package:absenqu_flutter/screens/dashboard/dashboard_screen.dart';
 import 'package:absenqu_flutter/screens/karyawan/psean_pegawai_screen.dart';
 import 'package:absenqu_flutter/screens/profile/my_profile_screen.dart';
 import 'package:absenqu_flutter/screens/profile/profile_karyawan_screen.dart';
@@ -52,7 +53,7 @@ class MyApp extends StatelessWidget {
 
       // For development/testing make it easy to open ProfileScreen directly.
       // Change initialRoute to '/splash' or remove the routes to restore previous behavior.
-      initialRoute: '/absen_masuk',
+      initialRoute: '/dashboard',
       routes: {
         '/': (context) => const SplashScreen(),
         '/splash': (context) => const SplashScreen(),
@@ -60,6 +61,7 @@ class MyApp extends StatelessWidget {
         '/login': (context) => const LoginScreen(),
         '/forgot_password': (context) => const ForgotPasswordScreen(),
         '/otp_verification': (context) => const OtpVerificationScreen(),
+        '/dashboard': (context) => const DashboardPage(),
         '/change_password': (context) => const ChangePasswordScreen(),
         '/absen_masukk': (context) => const AbsenMasukPage(),
         '/absen_invalid': (context) => const AbsenInvalidPage(),

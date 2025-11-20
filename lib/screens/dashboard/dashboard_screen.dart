@@ -5,27 +5,6 @@
 import 'package:flutter/material.dart';
 import 'package:absenqu_flutter/screens/absen_masuk/absen_masuk_page.dart';
 
-void main() {
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Dashboard UI',
-      theme: ThemeData(
-        primarySwatch: Colors.teal,
-        scaffoldBackgroundColor: const Color(0xFFE6F3F1),
-      ),
-      home: const DashboardPage(),
-    );
-  }
-}
-
 class DashboardPage extends StatelessWidget {
   const DashboardPage({super.key});
 
@@ -60,21 +39,45 @@ class DashboardPage extends StatelessWidget {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Image.asset('assets/images/absenqu-icon.png', height: 32),
+                                Image.asset(
+                                  'assets/images/absenqu-icon.png',
+                                  height: 32,
+                                ),
                                 const SizedBox(height: 2),
                                 const Text(
                                   'your partner manages employees',
-                                  style: TextStyle(fontSize: 10, color: Colors.black54),
+                                  style: TextStyle(
+                                    fontSize: 10,
+                                    color: Colors.black54,
+                                  ),
                                 ),
                               ],
                             ),
                           ),
                           const SizedBox(height: 12),
-                          const Text('Sandy Pratama', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
-                          const Text('NIP 1897819010001', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13)),
+                          const Text(
+                            'Sandy Pratama',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
+                            ),
+                          ),
+                          const Text(
+                            'NIP 1897819010001',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 13,
+                            ),
+                          ),
                           const SizedBox(height: 4),
-                          const Text('Manajer IT &\nSoftware Development', style: TextStyle(fontSize: 12)),
-                          const Text('Kantor Pusat', style: TextStyle(fontSize: 12)),
+                          const Text(
+                            'Manajer IT &\nSoftware Development',
+                            style: TextStyle(fontSize: 12),
+                          ),
+                          const Text(
+                            'Kantor Pusat',
+                            style: TextStyle(fontSize: 12),
+                          ),
                         ],
                       ),
                       const Spacer(),
@@ -103,23 +106,39 @@ class DashboardPage extends StatelessWidget {
                         end: Alignment.centerRight,
                       ),
                       borderRadius: BorderRadius.circular(24),
-                      boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 4)],
+                      boxShadow: [
+                        BoxShadow(color: Colors.black12, blurRadius: 4),
+                      ],
                     ),
                     child: Row(
                       children: [
                         const SizedBox(width: 12),
                         // Tombol Riwayat abu-abu
                         Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 16,
+                            vertical: 8,
+                          ),
                           decoration: BoxDecoration(
                             color: const Color(0xFF9E9E9E),
                             borderRadius: BorderRadius.circular(16),
                           ),
                           child: Row(
                             children: [
-                              const Icon(Icons.history, color: Colors.white, size: 18),
+                              const Icon(
+                                Icons.history,
+                                color: Colors.white,
+                                size: 18,
+                              ),
                               const SizedBox(width: 6),
-                              const Text('Riwayat', style: TextStyle(fontWeight: FontWeight.w600, color: Colors.white, fontSize: 14)),
+                              const Text(
+                                'Riwayat',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.white,
+                                  fontSize: 14,
+                                ),
+                              ),
                             ],
                           ),
                         ),
@@ -153,13 +172,22 @@ class DashboardPage extends StatelessWidget {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: const [
-                              Text('01 April 2025   |   1 Syawal 1446 H', style: TextStyle(fontWeight: FontWeight.bold)),
+                              Text(
+                                '01 April 2025   |   1 Syawal 1446 H',
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              ),
                               SizedBox(height: 8),
-                              Text('Waktu Saat ini 08.30', style: TextStyle(fontSize: 13)),
+                              Text(
+                                'Waktu Saat ini 08.30',
+                                style: TextStyle(fontSize: 13),
+                              ),
                               SizedBox(height: 6),
                               Text('Senin', style: TextStyle(fontSize: 13)),
                               SizedBox(height: 6),
-                              Text('Morning Breifing\nRapat Target Marketing April', style: TextStyle(fontSize: 12)),
+                              Text(
+                                'Morning Breifing\nRapat Target Marketing April',
+                                style: TextStyle(fontSize: 12),
+                              ),
                             ],
                           ),
                         ),
@@ -169,11 +197,33 @@ class DashboardPage extends StatelessWidget {
                         flex: 3,
                         child: Column(
                           children: [
-                            _absenCard(context, Icons.directions_run, 'Absen Masuk', '07.30', 'SESUAI', 'Peraturan Absen Masuk\nSift I Pukul 08.00', const Color(0xFFA0FFF9), onTap: () {
-                              Navigator.push(context, MaterialPageRoute(builder: (_) => AbsenMasukPage()));
-                            }),
+                            _absenCard(
+                              context,
+                              Icons.directions_run,
+                              'Absen Masuk',
+                              '07.30',
+                              'SESUAI',
+                              'Peraturan Absen Masuk\nSift I Pukul 08.00',
+                              const Color(0xFFA0FFF9),
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (_) => AbsenMasukPage(),
+                                  ),
+                                );
+                              },
+                            ),
                             const SizedBox(height: 10),
-                            _absenCard(context, Icons.directions_walk, 'Absen Pulang', '16.32', 'SESUAI', 'Peraturan Absen Pulang\nSift I Pukul 16.30', const Color(0xFFD8C8FF)),
+                            _absenCard(
+                              context,
+                              Icons.directions_walk,
+                              'Absen Pulang',
+                              '16.32',
+                              'SESUAI',
+                              'Peraturan Absen Pulang\nSift I Pukul 16.30',
+                              const Color(0xFFD8C8FF),
+                            ),
                           ],
                         ),
                       ),
@@ -202,7 +252,13 @@ class DashboardPage extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text('Ranking Pegawai Bulan ini', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+                      const Text(
+                        'Ranking Pegawai Bulan ini',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                        ),
+                      ),
                       const SizedBox(height: 10),
                       Container(
                         decoration: BoxDecoration(
@@ -212,7 +268,10 @@ class DashboardPage extends StatelessWidget {
                         child: Column(
                           children: [
                             Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 16,
+                                vertical: 10,
+                              ),
                               child: Container(
                                 decoration: BoxDecoration(
                                   color: Colors.white,
@@ -220,7 +279,10 @@ class DashboardPage extends StatelessWidget {
                                 ),
                                 child: Row(
                                   children: [
-                                    const Icon(Icons.search, color: Colors.black38),
+                                    const Icon(
+                                      Icons.search,
+                                      color: Colors.black38,
+                                    ),
                                     const SizedBox(width: 8),
                                     Expanded(
                                       child: TextField(
@@ -236,12 +298,60 @@ class DashboardPage extends StatelessWidget {
                                 ),
                               ),
                             ),
-                            _rankingTile(1, 'Rudi Admojo', 'Staf Marketing', 'Kantor Cabang Ringroad', 1100, 'assets/images/amrin.png', false),
-                            _rankingTile(2, 'Sandy Pratama', 'Manager Marketing', 'Kantor Cabang Ringroad', 1000, 'assets/images/icon.png', true),
-                            _rankingTile(3, 'Amrin Tambunan', 'Staf Keuangan', 'Kantor Cabang Ringroad', 900, 'assets/images/amrin.png', false),
-                            _rankingTile(4, 'Rudi Admojo', 'Staf Marketing', 'Kantor Cabang Ringroad', 800, 'assets/images/rudi.png', false),
-                            _rankingTile(5, 'Rudi Admojo', 'Staf Marketing', 'Kantor Cabang Ringroad', 810, 'assets/images/rudi.png', false),
-                            _rankingTile(6, 'Rudi Admojo', 'Staf Marketing', 'Kantor Cabang Ringroad', 700, 'assets/images/rudi.png', false),
+                            _rankingTile(
+                              1,
+                              'Rudi Admojo',
+                              'Staf Marketing',
+                              'Kantor Cabang Ringroad',
+                              1100,
+                              'assets/images/amrin.png',
+                              false,
+                            ),
+                            _rankingTile(
+                              2,
+                              'Sandy Pratama',
+                              'Manager Marketing',
+                              'Kantor Cabang Ringroad',
+                              1000,
+                              'assets/images/icon.png',
+                              true,
+                            ),
+                            _rankingTile(
+                              3,
+                              'Amrin Tambunan',
+                              'Staf Keuangan',
+                              'Kantor Cabang Ringroad',
+                              900,
+                              'assets/images/amrin.png',
+                              false,
+                            ),
+                            _rankingTile(
+                              4,
+                              'Rudi Admojo',
+                              'Staf Marketing',
+                              'Kantor Cabang Ringroad',
+                              800,
+                              'assets/images/rudi.png',
+                              false,
+                            ),
+                            _rankingTile(
+                              5,
+                              'Rudi Admojo',
+                              'Staf Marketing',
+                              'Kantor Cabang Ringroad',
+                              810,
+                              'assets/images/rudi.png',
+                              false,
+                            ),
+                            _rankingTile(
+                              6,
+                              'Rudi Admojo',
+                              'Staf Marketing',
+                              'Kantor Cabang Ringroad',
+                              700,
+                              'assets/images/rudi.png',
+                              false,
+                            ),
                           ],
                         ),
                       ),
@@ -255,15 +365,36 @@ class DashboardPage extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text('Chalange Anda Bulan ini', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+                      const Text(
+                        'Chalange Anda Bulan ini',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                        ),
+                      ),
                       const SizedBox(height: 10),
-                      _challengeRow(Icons.fitness_center, 'Berolah Raga', 200, 20),
+                      _challengeRow(
+                        Icons.fitness_center,
+                        'Berolah Raga',
+                        200,
+                        20,
+                      ),
                       const SizedBox(height: 10),
-                      _challengeRow(Icons.self_improvement, 'Sholat Berjamaah', 400, 20),
+                      _challengeRow(
+                        Icons.self_improvement,
+                        'Sholat Berjamaah',
+                        400,
+                        20,
+                      ),
                       const SizedBox(height: 10),
                       _challengeRow(Icons.menu_book, 'Hafalan Quran', 200, 20),
                       const SizedBox(height: 10),
-                      _challengeRow(Icons.auto_stories, 'Membaca Buku', 150, 20),
+                      _challengeRow(
+                        Icons.auto_stories,
+                        'Membaca Buku',
+                        150,
+                        20,
+                      ),
                     ],
                   ),
                 ),
@@ -301,7 +432,10 @@ Widget _iconWithBadge(IconData icon, int badge) {
               color: Colors.red,
               shape: BoxShape.circle,
             ),
-            child: Text('$badge', style: const TextStyle(color: Colors.white, fontSize: 10)),
+            child: Text(
+              '$badge',
+              style: const TextStyle(color: Colors.white, fontSize: 10),
+            ),
           ),
         ),
     ],
@@ -327,8 +461,14 @@ Widget _smallIconWithBadge(IconData icon, int badge) {
           top: 4,
           child: Container(
             padding: const EdgeInsets.all(3),
-            decoration: const BoxDecoration(color: Colors.red, shape: BoxShape.circle),
-            child: Text('$badge', style: const TextStyle(color: Colors.white, fontSize: 10)),
+            decoration: const BoxDecoration(
+              color: Colors.red,
+              shape: BoxShape.circle,
+            ),
+            child: Text(
+              '$badge',
+              style: const TextStyle(color: Colors.white, fontSize: 10),
+            ),
           ),
         ),
     ],
@@ -354,15 +494,34 @@ Widget _smallIconInCyan(IconData icon, int badge) {
           top: 2,
           child: Container(
             padding: const EdgeInsets.all(3),
-            decoration: const BoxDecoration(color: Colors.red, shape: BoxShape.circle),
-            child: Text('$badge', style: const TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.bold)),
+            decoration: const BoxDecoration(
+              color: Colors.red,
+              shape: BoxShape.circle,
+            ),
+            child: Text(
+              '$badge',
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: 10,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
           ),
         ),
     ],
   );
 }
 
-Widget _absenCard(BuildContext context, IconData icon, String title, String time, String status, String subtitle, Color color, {VoidCallback? onTap}) {
+Widget _absenCard(
+  BuildContext context,
+  IconData icon,
+  String title,
+  String time,
+  String status,
+  String subtitle,
+  Color color, {
+  VoidCallback? onTap,
+}) {
   return GestureDetector(
     onTap: onTap,
     child: Container(
@@ -380,7 +539,10 @@ Widget _absenCard(BuildContext context, IconData icon, String title, String time
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(title, style: const TextStyle(fontWeight: FontWeight.bold)),
+                Text(
+                  title,
+                  style: const TextStyle(fontWeight: FontWeight.bold),
+                ),
                 Text('$time   $status', style: const TextStyle(fontSize: 15)),
                 Text(subtitle, style: const TextStyle(fontSize: 11)),
               ],
@@ -406,19 +568,32 @@ Widget _menuCard(String label, String asset) {
       children: [
         Image.asset(asset, height: 32),
         const SizedBox(height: 8),
-        Text(label, style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w600)),
+        Text(
+          label,
+          style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
+        ),
       ],
     ),
   );
 }
 
-Widget _rankingTile(int rank, String name, String role, String kantor, int point, String asset, bool highlight) {
+Widget _rankingTile(
+  int rank,
+  String name,
+  String role,
+  String kantor,
+  int point,
+  String asset,
+  bool highlight,
+) {
   return Container(
     margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
     decoration: BoxDecoration(
       color: highlight ? const Color(0xFFA0FFF9) : Colors.white,
       borderRadius: BorderRadius.circular(20),
-      boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 6, offset: Offset(0, 4))],
+      boxShadow: [
+        BoxShadow(color: Colors.black12, blurRadius: 6, offset: Offset(0, 4)),
+      ],
     ),
     child: Padding(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
@@ -432,17 +607,25 @@ Widget _rankingTile(int rank, String name, String role, String kantor, int point
             decoration: BoxDecoration(
               color: Colors.white,
               shape: BoxShape.circle,
-              boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 2, offset: Offset(0, 2))],
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black12,
+                  blurRadius: 2,
+                  offset: Offset(0, 2),
+                ),
+              ],
             ),
-            child: Center(child: Text('$rank', style: const TextStyle(fontWeight: FontWeight.bold))),
+            child: Center(
+              child: Text(
+                '$rank',
+                style: const TextStyle(fontWeight: FontWeight.bold),
+              ),
+            ),
           ),
           const SizedBox(width: 12),
 
           // Avatar
-          CircleAvatar(
-            backgroundImage: AssetImage(asset),
-            radius: 24,
-          ),
+          CircleAvatar(backgroundImage: AssetImage(asset), radius: 24),
           const SizedBox(width: 12),
 
           // Name and role
@@ -450,7 +633,13 @@ Widget _rankingTile(int rank, String name, String role, String kantor, int point
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(name, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
+                Text(
+                  name,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 14,
+                  ),
+                ),
                 const SizedBox(height: 4),
                 Text(role, style: const TextStyle(fontSize: 12)),
                 Text(kantor, style: const TextStyle(fontSize: 11)),
@@ -467,7 +656,13 @@ Widget _rankingTile(int rank, String name, String role, String kantor, int point
               children: [
                 const Text('Nilai Poin', style: TextStyle(fontSize: 12)),
                 const SizedBox(height: 6),
-                Text('$point', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+                Text(
+                  '$point',
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
+                  ),
+                ),
               ],
             ),
           ),
@@ -494,7 +689,13 @@ Widget _challengeRow(IconData icon, String label, int target, int total) {
               end: Alignment.bottomRight,
             ),
             borderRadius: BorderRadius.circular(32),
-            boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 6, offset: Offset(0, 4))],
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black12,
+                blurRadius: 6,
+                offset: Offset(0, 4),
+              ),
+            ],
           ),
           child: Row(
             children: [
@@ -511,7 +712,10 @@ Widget _challengeRow(IconData icon, String label, int target, int total) {
               Expanded(
                 child: Text(
                   label,
-                  style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
+                  ),
                 ),
               ),
             ],
@@ -525,19 +729,34 @@ Widget _challengeRow(IconData icon, String label, int target, int total) {
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(32),
-          boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 6, offset: Offset(0, 4))],
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black12,
+              blurRadius: 6,
+              offset: Offset(0, 4),
+            ),
+          ],
         ),
         child: Row(
           children: [
             Expanded(
               child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 12),
+                padding: const EdgeInsets.symmetric(
+                  vertical: 10,
+                  horizontal: 12,
+                ),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const Text('Target', style: TextStyle(fontSize: 12)),
-                    Text('$target', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+                    Text(
+                      '$target',
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -546,13 +765,23 @@ Widget _challengeRow(IconData icon, String label, int target, int total) {
             Container(width: 1, height: 48, color: Colors.grey.shade300),
             Expanded(
               child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 12),
+                padding: const EdgeInsets.symmetric(
+                  vertical: 10,
+                  horizontal: 12,
+                ),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     const Text('Total Poin', style: TextStyle(fontSize: 12)),
-                    Text('$total', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: Colors.red)),
+                    Text(
+                      '$total',
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                        color: Colors.red,
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -598,16 +827,26 @@ class _Header extends StatelessWidget {
                       fit: BoxFit.contain,
                     ),
                     const SizedBox(height: 12),
-                    const Text('Sandy Pratama',
-                        style: TextStyle(
-                            fontSize: 18, fontWeight: FontWeight.w700)),
+                    const Text(
+                      'Sandy Pratama',
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
                     SizedBox(height: 4),
-                    Text('NIP 1897819010001',
-                        style: TextStyle(
-                            fontSize: 12, fontWeight: FontWeight.w600)),
+                    Text(
+                      'NIP 1897819010001',
+                      style: TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
                     SizedBox(height: 6),
-          Text('Manajer IT &\nSoftware Development',
-            style: TextStyle(fontSize: 12)),
+                    Text(
+                      'Manajer IT &\nSoftware Development',
+                      style: TextStyle(fontSize: 12),
+                    ),
                     SizedBox(height: 6),
                     Text('Kantor Pusat', style: TextStyle(fontSize: 12)),
                   ],
@@ -618,7 +857,7 @@ class _Header extends StatelessWidget {
               ClipRRect(
                 borderRadius: BorderRadius.circular(16),
                 child: Image.asset(
-                      'assets/images/icon.png',
+                  'assets/images/icon.png',
                   height: 96,
                   fit: BoxFit.cover,
                 ),
@@ -638,7 +877,8 @@ class _Header extends StatelessWidget {
                   backgroundColor: Colors.white70,
                   foregroundColor: Colors.black87,
                   shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12)),
+                    borderRadius: BorderRadius.circular(12),
+                  ),
                 ),
               ),
               const SizedBox(width: 8),
@@ -658,7 +898,7 @@ class _Header extends StatelessWidget {
                 ),
               ),
             ],
-          )
+          ),
         ],
       ),
     );
@@ -684,19 +924,27 @@ class _InfoRow extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: const [
-                    Text('01 April 2025 | 1 Syawal 1446 H',
-                        style: TextStyle(fontWeight: FontWeight.bold)),
+                    Text(
+                      '01 April 2025 | 1 Syawal 1446 H',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
                     SizedBox(height: 8),
                     Text('Waktu Saat ini', style: TextStyle(fontSize: 12)),
                     SizedBox(height: 6),
-                    Text('08.30',
-                        style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.bold)),
+                    Text(
+                      '08.30',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                     SizedBox(height: 6),
                     Text('Senin', style: TextStyle(fontSize: 14)),
                     SizedBox(height: 6),
-          Text('Morning Briefing\nRapat Target Marketing April',
-            style: TextStyle(fontSize: 12)),
+                    Text(
+                      'Morning Briefing\nRapat Target Marketing April',
+                      style: TextStyle(fontSize: 12),
+                    ),
                   ],
                 ),
               ),
@@ -738,12 +986,13 @@ class _MiniCard extends StatelessWidget {
   final String status;
   final String subtitle;
 
-  const _MiniCard(
-      {required this.color,
-      required this.title,
-      required this.time,
-      required this.status,
-      required this.subtitle});
+  const _MiniCard({
+    required this.color,
+    required this.title,
+    required this.time,
+    required this.status,
+    required this.subtitle,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -763,14 +1012,17 @@ class _MiniCard extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  Text(time, style: const TextStyle(fontWeight: FontWeight.bold)),
+                  Text(
+                    time,
+                    style: const TextStyle(fontWeight: FontWeight.bold),
+                  ),
                   Text(status, style: const TextStyle(fontSize: 12)),
                 ],
-              )
+              ),
             ],
           ),
           const SizedBox(height: 6),
-          Text(subtitle, style: const TextStyle(fontSize: 11))
+          Text(subtitle, style: const TextStyle(fontSize: 11)),
         ],
       ),
     );
@@ -803,8 +1055,7 @@ class _FeatureGrid extends StatelessWidget {
               color: Colors.white,
               borderRadius: BorderRadius.circular(12),
               boxShadow: [
-                BoxShadow(
-                    color: Colors.black.withOpacity(0.05), blurRadius: 6),
+                BoxShadow(color: Colors.black.withOpacity(0.05), blurRadius: 6),
               ],
             ),
             child: Column(
@@ -815,7 +1066,7 @@ class _FeatureGrid extends StatelessWidget {
                   child: Icon(f['icon'], color: Colors.black87),
                 ),
                 const SizedBox(height: 8),
-                Text(f['label'], style: const TextStyle(fontSize: 12))
+                Text(f['label'], style: const TextStyle(fontSize: 12)),
               ],
             ),
           );
@@ -831,7 +1082,7 @@ class _RankingCard extends StatelessWidget {
       'name': i == 1 ? 'Sandy Pratama' : 'Rudi Admojo',
       'role': 'Staf Marketing',
       'points': 1100 - i * 100,
-      'avatar': 'https://picsum.photos/seed/$i/80'
+      'avatar': 'https://picsum.photos/seed/$i/80',
     };
   });
 
@@ -842,12 +1093,17 @@ class _RankingCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: const Color(0xFFFFFFFF),
         borderRadius: BorderRadius.circular(12),
-        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 8)],
+        boxShadow: [
+          BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 8),
+        ],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text('Ranking Pegawai Bulan ini', style: TextStyle(fontWeight: FontWeight.bold)),
+          const Text(
+            'Ranking Pegawai Bulan ini',
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
           const SizedBox(height: 8),
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
@@ -855,7 +1111,13 @@ class _RankingCard extends StatelessWidget {
               color: const Color(0xFFF2F6F6),
               borderRadius: BorderRadius.circular(24),
             ),
-            child: Row(children: const [Icon(Icons.search), SizedBox(width: 8), Expanded(child: Text('Sandy Pratama'))]),
+            child: Row(
+              children: const [
+                Icon(Icons.search),
+                SizedBox(width: 8),
+                Expanded(child: Text('Sandy Pratama')),
+              ],
+            ),
           ),
           const SizedBox(height: 12),
           Column(
@@ -876,9 +1138,16 @@ class _RankingCard extends StatelessWidget {
                       child: Container(
                         padding: const EdgeInsets.all(12),
                         decoration: BoxDecoration(
-                          color: isHighlight ? const Color(0xFFE0FFF8) : Colors.white,
+                          color: isHighlight
+                              ? const Color(0xFFE0FFF8)
+                              : Colors.white,
                           borderRadius: BorderRadius.circular(12),
-                          boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.03), blurRadius: 6)],
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.03),
+                              blurRadius: 6,
+                            ),
+                          ],
                         ),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -886,28 +1155,48 @@ class _RankingCard extends StatelessWidget {
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(it['name'], style: const TextStyle(fontWeight: FontWeight.bold)),
-                                Text(it['role'], style: const TextStyle(fontSize: 12)),
-                                Text('Kantor Cabang Ringroad', style: const TextStyle(fontSize: 11)),
+                                Text(
+                                  it['name'],
+                                  style: const TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                Text(
+                                  it['role'],
+                                  style: const TextStyle(fontSize: 12),
+                                ),
+                                Text(
+                                  'Kantor Cabang Ringroad',
+                                  style: const TextStyle(fontSize: 11),
+                                ),
                               ],
                             ),
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.end,
                               children: [
-                                Text('Nilai Poin', style: const TextStyle(fontSize: 12)),
+                                Text(
+                                  'Nilai Poin',
+                                  style: const TextStyle(fontSize: 12),
+                                ),
                                 const SizedBox(height: 6),
-                                Text('${it['points']}', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+                                Text(
+                                  '${it['points']}',
+                                  style: const TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 16,
+                                  ),
+                                ),
                               ],
-                            )
+                            ),
                           ],
                         ),
                       ),
-                    )
+                    ),
                   ],
                 ),
               );
             }).toList(),
-          )
+          ),
         ],
       ),
     );
@@ -916,10 +1205,30 @@ class _RankingCard extends StatelessWidget {
 
 class _ChallengeList extends StatelessWidget {
   final List<Map<String, dynamic>> challenges = [
-    {'label': 'Berolah Raga', 'target': 200, 'total': 20, 'icon': Icons.fitness_center},
-    {'label': 'Sholat Berjamaah', 'target': 400, 'total': 20, 'icon': Icons.self_improvement},
-    {'label': 'Hafalan Quran', 'target': 200, 'total': 20, 'icon': Icons.menu_book},
-    {'label': 'Membaca Buku', 'target': 150, 'total': 20, 'icon': Icons.auto_stories},
+    {
+      'label': 'Berolah Raga',
+      'target': 200,
+      'total': 20,
+      'icon': Icons.fitness_center,
+    },
+    {
+      'label': 'Sholat Berjamaah',
+      'target': 400,
+      'total': 20,
+      'icon': Icons.self_improvement,
+    },
+    {
+      'label': 'Hafalan Quran',
+      'target': 200,
+      'total': 20,
+      'icon': Icons.menu_book,
+    },
+    {
+      'label': 'Membaca Buku',
+      'target': 150,
+      'total': 20,
+      'icon': Icons.auto_stories,
+    },
   ];
 
   @override
@@ -927,7 +1236,10 @@ class _ChallengeList extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text('Chalange Anda Bulan ini', style: TextStyle(fontWeight: FontWeight.bold)),
+        const Text(
+          'Chalange Anda Bulan ini',
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
         const SizedBox(height: 12),
         Column(
           children: challenges.map((c) {
@@ -946,7 +1258,14 @@ class _ChallengeList extends StatelessWidget {
                         children: [
                           CircleAvatar(child: Icon(c['icon'])),
                           const SizedBox(width: 12),
-                          Expanded(child: Text(c['label'], style: const TextStyle(fontWeight: FontWeight.bold))),
+                          Expanded(
+                            child: Text(
+                              c['label'],
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
                         ],
                       ),
                     ),
@@ -958,23 +1277,40 @@ class _ChallengeList extends StatelessWidget {
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(12),
-                      boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.03), blurRadius: 6)],
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.03),
+                          blurRadius: 6,
+                        ),
+                      ],
                     ),
                     child: Column(
                       children: [
                         const Text('Target', style: TextStyle(fontSize: 12)),
-                        Text('${c['target']}', style: const TextStyle(fontWeight: FontWeight.bold)),
+                        Text(
+                          '${c['target']}',
+                          style: const TextStyle(fontWeight: FontWeight.bold),
+                        ),
                         const SizedBox(height: 6),
-                        const Text('Total Poin', style: TextStyle(fontSize: 12)),
-                        Text('${c['total']}', style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.red)),
+                        const Text(
+                          'Total Poin',
+                          style: TextStyle(fontSize: 12),
+                        ),
+                        Text(
+                          '${c['total']}',
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.red,
+                          ),
+                        ),
                       ],
                     ),
-                  )
+                  ),
                 ],
               ),
             );
           }).toList(),
-        )
+        ),
       ],
     );
   }
