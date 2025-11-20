@@ -30,12 +30,17 @@ environment:
 dependencies:
     flutter:
         sdk: flutter
+
     flutter_svg: ^2.0.9
     font_awesome_flutter: ^10.7.0
-    image_picker: ^1.0.4
     intl: ^0.20.2
     hijri: ^3.0.0
 
+
+
+    google_fonts: ^6.0.0
+    image_picker: ^1.1.1
+    permission_handler: ^11.3.0
 
 
     # The following adds the Cupertino Icons font to your application.
@@ -52,6 +57,7 @@ dependencies:
 dev_dependencies:
     flutter_test:
         sdk: flutter
+    pinput: ^4.0.0
 
     # The "flutter_lints" package below contains a set of recommended lints to
     # encourage good coding practices. The lint set provided by the package is

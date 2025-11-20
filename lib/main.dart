@@ -19,6 +19,13 @@ import 'package:absenqu_flutter/screens/izin/proses_ajukanizin.dart';
 import 'package:absenqu_flutter/screens/lembur/lembur.dart';
 import 'package:absenqu_flutter/screens/lembur/surat_tugas_lembur.dart';
 import 'package:absenqu_flutter/screens/slipgaji/slipgaji.dart';
+
+import 'package:absenqu_flutter/screens/login_screen.dart';
+import 'package:absenqu_flutter/screens/LupaPassword/forgot_password_screen.dart';
+import 'package:absenqu_flutter/screens/LupaPassword/change_password_screen.dart';
+import 'package:absenqu_flutter/screens/LupaPassword/otp_verification_screen.dart';
+import 'package:absenqu_flutter/screens/absen_masuk/absen_masuk_page.dart';
+import 'package:absenqu_flutter/screens/absen_masuk/absen_invalid_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:intl/date_symbol_data_local.dart';
@@ -33,10 +40,6 @@ void main() async {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // Small contract:
-  // - Inputs: none
-  // - Outputs: MaterialApp that routes to ProfileScreen for quick testing
-  // - Error modes: missing assets may cause runtime image error; falls back to blank
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -46,12 +49,21 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
       debugShowCheckedModeBanner: false,
+
       // For development/testing make it easy to open ProfileScreen directly.
       // Change initialRoute to '/splash' or remove the routes to restore previous behavior.
       initialRoute: '/absen_masuk',
       routes: {
         '/': (context) => const SplashScreen(),
         '/splash': (context) => const SplashScreen(),
+
+        '/login': (context) => const LoginScreen(),
+        '/forgot_password': (context) => const ForgotPasswordScreen(),
+        '/otp_verification': (context) => const OtpVerificationScreen(),
+        '/change_password': (context) => const ChangePasswordScreen(),
+        '/absen_masukk': (context) => const AbsenMasukPage(),
+        '/absen_invalid': (context) => const AbsenInvalidPage(),
+
         '/profile': (context) => const ProfileScreen(),
         '/profile_karyawan': (context) => const ProfileKaryawanScreen(),
         '/karyawan_textChat': (context) =>
