@@ -114,41 +114,58 @@ class DashboardPage extends StatelessWidget {
                       children: [
                         const SizedBox(width: 12),
                         // Tombol Riwayat abu-abu
-                        Container(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 16,
-                            vertical: 8,
-                          ),
-                          decoration: BoxDecoration(
-                            color: const Color(0xFF9E9E9E),
-                            borderRadius: BorderRadius.circular(16),
-                          ),
-                          child: Row(
-                            children: [
-                              const Icon(
-                                Icons.history,
-                                color: Colors.white,
-                                size: 18,
-                              ),
-                              const SizedBox(width: 6),
-                              const Text(
-                                'Riwayat',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.w600,
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.pushNamed(context, '/absen_masuk');
+                          },
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 16,
+                              vertical: 8,
+                            ),
+                            decoration: BoxDecoration(
+                              color: const Color(0xFF9E9E9E),
+                              borderRadius: BorderRadius.circular(16),
+                            ),
+                            child: Row(
+                              children: [
+                                const Icon(
+                                  Icons.history,
                                   color: Colors.white,
-                                  fontSize: 14,
+                                  size: 18,
                                 ),
-                              ),
-                            ],
+                                const SizedBox(width: 6),
+                                const Text(
+                                  'Riwayat',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.w600,
+                                    color: Colors.white,
+                                    fontSize: 14,
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                         const Spacer(),
                         // Tiga icon kecil di sebelah kanan
-                        _smallIconInCyan(Icons.person, 0),
+                        _smallIconInCyan(
+                          Icons.person,
+                          0,
+                          onTap: () {
+                            Navigator.pushNamed(context, '/profile');
+                          },
+                        ),
                         const SizedBox(width: 8),
                         _smallIconInCyan(Icons.info, 1),
                         const SizedBox(width: 8),
-                        _smallIconInCyan(Icons.mail, 1),
+                        _smallIconInCyan(
+                          Icons.mail,
+                          1,
+                          onTap: () {
+                            Navigator.pushNamed(context, '/karyawan_chat');
+                          },
+                        ),
                         const SizedBox(width: 12),
                       ],
                     ),
@@ -234,15 +251,67 @@ class DashboardPage extends StatelessWidget {
                 // MENU CEPAT
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 24),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      _menuCard('Izin', 'assets/images/icon1.png'),
-                      _menuCard('Cuti', 'assets/images/icon2.png'),
-                      _menuCard('Pegawai', 'assets/images/icon3.png'),
-                      _menuCard('Challenge', 'assets/images/icon4.png'),
-                      _menuCard('Slip Gaji', 'assets/images/icon5.png'),
-                    ],
+                  child: SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      children: [
+                        _menuCard(
+                          'Izin',
+                          'assets/images/icon1.png',
+                          onTap: () {
+                            Navigator.pushNamed(context, '/ajukanizin');
+                          },
+                        ),
+                        const SizedBox(width: 12),
+                        _menuCard(
+                          'Cuti',
+                          'assets/images/icon2.png',
+                          onTap: () {
+                            //Navigator.pushNamed(context, '/ajukanizin');
+                          },
+                        ),
+                        const SizedBox(width: 12),
+                        _menuCard(
+                          'Pegawai',
+                          'assets/images/icon3.png',
+                          onTap: () {
+                            //Navigator.pushNamed(context, '/ajukanizin');
+                          },
+                        ),
+                        const SizedBox(width: 12),
+                        _menuCard(
+                          'Challenge',
+                          'assets/images/icon4.png',
+                          onTap: () {
+                            //Navigator.pushNamed(context, '/ajukanizin');
+                          },
+                        ),
+                        const SizedBox(width: 12),
+                        _menuCard(
+                          'Slip Gaji',
+                          'assets/images/icon5.png',
+                          onTap: () {
+                            //Navigator.pushNamed(context, '/ajukanizin');
+                          },
+                        ),
+                        const SizedBox(width: 12),
+                        _menuCard(
+                          'Lembur',
+                          'assets/images/icon5.png',
+                          onTap: () {
+                            Navigator.pushNamed(context, '/lembur');
+                          },
+                        ),
+                        const SizedBox(width: 12),
+                        _menuCard(
+                          'Reimburse',
+                          'assets/images/icon5.png',
+                          onTap: () {
+                            //Navigator.pushNamed(context, '/ajukanizin');
+                          },
+                        ),
+                      ],
+                    ),
                   ),
                 ),
                 const SizedBox(height: 18),
@@ -475,40 +544,43 @@ Widget _smallIconWithBadge(IconData icon, int badge) {
   );
 }
 
-Widget _smallIconInCyan(IconData icon, int badge) {
-  return Stack(
-    alignment: Alignment.topRight,
-    children: [
-      Container(
-        width: 40,
-        height: 40,
-        decoration: BoxDecoration(
-          color: Colors.grey.shade600,
-          shape: BoxShape.circle,
+Widget _smallIconInCyan(IconData icon, int badge, {VoidCallback? onTap}) {
+  return GestureDetector(
+    onTap: onTap,
+    child: Stack(
+      alignment: Alignment.topRight,
+      children: [
+        Container(
+          width: 40,
+          height: 40,
+          decoration: BoxDecoration(
+            color: Colors.grey.shade600,
+            shape: BoxShape.circle,
+          ),
+          child: Center(child: Icon(icon, color: Colors.white, size: 18)),
         ),
-        child: Center(child: Icon(icon, color: Colors.white, size: 18)),
-      ),
-      if (badge > 0)
-        Positioned(
-          right: 2,
-          top: 2,
-          child: Container(
-            padding: const EdgeInsets.all(3),
-            decoration: const BoxDecoration(
-              color: Colors.red,
-              shape: BoxShape.circle,
-            ),
-            child: Text(
-              '$badge',
-              style: const TextStyle(
-                color: Colors.white,
-                fontSize: 10,
-                fontWeight: FontWeight.bold,
+        if (badge > 0)
+          Positioned(
+            right: 2,
+            top: 2,
+            child: Container(
+              padding: const EdgeInsets.all(3),
+              decoration: const BoxDecoration(
+                color: Colors.red,
+                shape: BoxShape.circle,
+              ),
+              child: Text(
+                '$badge',
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 10,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
           ),
-        ),
-    ],
+      ],
+    ),
   );
 }
 
@@ -554,25 +626,28 @@ Widget _absenCard(
   );
 }
 
-Widget _menuCard(String label, String asset) {
-  return Container(
-    width: 70,
-    height: 90,
-    decoration: BoxDecoration(
-      color: Colors.white,
-      borderRadius: BorderRadius.circular(18),
-      boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 4)],
-    ),
-    child: Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Image.asset(asset, height: 32),
-        const SizedBox(height: 8),
-        Text(
-          label,
-          style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
-        ),
-      ],
+Widget _menuCard(String label, String asset, {VoidCallback? onTap}) {
+  return GestureDetector(
+    onTap: onTap,
+    child: Container(
+      width: 70,
+      height: 90,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(18),
+        boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 4)],
+      ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Image.asset(asset, height: 32),
+          const SizedBox(height: 8),
+          Text(
+            label,
+            style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
+          ),
+        ],
+      ),
     ),
   );
 }
@@ -886,7 +961,9 @@ class _Header extends StatelessWidget {
                 backgroundColor: Colors.white70,
                 child: IconButton(
                   icon: const Icon(Icons.info_outline),
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/profile');
+                  },
                 ),
               ),
               const SizedBox(width: 8),
