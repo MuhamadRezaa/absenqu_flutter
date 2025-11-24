@@ -1,5 +1,9 @@
-import 'package:absenqu_flutter/screens/splash_screen.dart';
+import 'package:absenqu_flutter/screens/reimburse/reimburse_screen.dart';
+import 'screens/challenge/challenge_employee_page.dart';
+import 'screens/olahraga/olahraga_challenge_page.dart';
+import 'screens/slip_gaji/slip_gaji_page.dart';
 import 'package:flutter/material.dart';
+
 
 void main() {
   runApp(const MyApp());
@@ -17,7 +21,12 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
       debugShowCheckedModeBanner: false,
-      home: const SplashScreen(),
+      routes: {
+        '/challenge': (_) => const ChallengeEmployeePage(),
+        '/olahraga': (_) => const OlahragaChallengePage(),
+       '/slipgaji': (_) => const SlipGajiPage(),
+      },
+      home: const ChallengeEmployeePage(),
     );
   }
 }
