@@ -57,14 +57,11 @@ class MyApp extends StatelessWidget {
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
-      supportedLocales: const [
-        Locale('id', 'ID'),
-        Locale('en', 'US'),
-      ],
+      supportedLocales: const [Locale('id', 'ID'), Locale('en', 'US')],
 
       // For development/testing make it easy to open ProfileScreen directly.
       // Change initialRoute to '/splash' or remove the routes to restore previous behavior.
-      initialRoute: '/dashboard',
+      initialRoute: '/splash',
       routes: {
         '/': (context) => const SplashScreen(),
         '/splash': (context) => const SplashScreen(),
