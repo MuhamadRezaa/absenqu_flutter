@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:absenqu_flutter/screens/absen_masuk/absen_masuk_page.dart';
 import 'package:absenqu_flutter/screens/absen_pulang/absen_pulang_screen.dart';
 import 'package:absenqu_flutter/screens/rundown/rundown_schedule_screen.dart';
+import 'package:absenqu_flutter/screens/cuti/cuti_screen.dart';
 
 class DashboardPage extends StatelessWidget {
   const DashboardPage({super.key});
@@ -288,7 +289,12 @@ class DashboardPage extends StatelessWidget {
                           'Cuti',
                           'assets/images/icon2.png',
                           onTap: () {
-                            //Navigator.pushNamed(context, '/ajukanizin');
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (_) => const CutiScreen(),
+                              ),
+                            );
                           },
                         ),
                         const SizedBox(width: 12),
