@@ -49,13 +49,9 @@ class _RundownScheduleScreenState extends State<RundownScheduleScreen> {
               padding: const EdgeInsets.fromLTRB(20, 16, 20, 16),
               child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.end,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                      Text(tanggalBulan, style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w700, color: Color(0xFF373643))),
-                      Text(tahun, style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w700, color: Color(0xFF373643))),
-                    ]),
                     Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
                       Text(DateFormat('HH.mm', 'id_ID').format(DateTime.now()) + ' WIB',
                           style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w700, color: Color(0xFF373643))),

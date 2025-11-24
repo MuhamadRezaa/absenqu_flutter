@@ -4,6 +4,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:absenqu_flutter/screens/absen_masuk/absen_masuk_page.dart';
+import 'package:absenqu_flutter/screens/absen_pulang/absen_pulang_screen.dart';
+import 'package:absenqu_flutter/screens/rundown/rundown_schedule_screen.dart';
 
 class DashboardPage extends StatelessWidget {
   const DashboardPage({super.key});
@@ -180,32 +182,43 @@ class DashboardPage extends StatelessWidget {
                     children: [
                       Expanded(
                         flex: 2,
-                        child: Container(
-                          padding: const EdgeInsets.all(16),
-                          decoration: BoxDecoration(
-                            color: const Color(0xFFFFF9D6),
-                            borderRadius: BorderRadius.circular(18),
-                          ),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: const [
-                              Text(
-                                '01 April 2025   |   1 Syawal 1446 H',
-                                style: TextStyle(fontWeight: FontWeight.bold),
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (_) =>
+                                    RundownScheduleScreen(day: DateTime.now()),
                               ),
-                              SizedBox(height: 8),
-                              Text(
-                                'Waktu Saat ini 08.30',
-                                style: TextStyle(fontSize: 13),
-                              ),
-                              SizedBox(height: 6),
-                              Text('Senin', style: TextStyle(fontSize: 13)),
-                              SizedBox(height: 6),
-                              Text(
-                                'Morning Breifing\nRapat Target Marketing April',
-                                style: TextStyle(fontSize: 12),
-                              ),
-                            ],
+                            );
+                          },
+                          child: Container(
+                            padding: const EdgeInsets.all(16),
+                            decoration: BoxDecoration(
+                              color: const Color(0xFFFFF9D6),
+                              borderRadius: BorderRadius.circular(18),
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: const [
+                                Text(
+                                  '01 April 2025   |   1 Syawal 1446 H',
+                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                ),
+                                SizedBox(height: 8),
+                                Text(
+                                  'Waktu Saat ini 08.30',
+                                  style: TextStyle(fontSize: 13),
+                                ),
+                                SizedBox(height: 6),
+                                Text('Senin', style: TextStyle(fontSize: 13)),
+                                SizedBox(height: 6),
+                                Text(
+                                  'Morning Breifing\nRapat Target Marketing April',
+                                  style: TextStyle(fontSize: 12),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ),
@@ -240,6 +253,14 @@ class DashboardPage extends StatelessWidget {
                               'SESUAI',
                               'Peraturan Absen Pulang\nSift I Pukul 16.30',
                               const Color(0xFFD8C8FF),
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (_) => const AbsenPulangScreen(),
+                                  ),
+                                );
+                              },
                             ),
                           ],
                         ),
@@ -545,12 +566,12 @@ Widget _smallIconWithBadge(IconData icon, int badge) {
 }
 
 Widget _smallIconInCyan(IconData icon, int badge, {VoidCallback? onTap}) {
-  return GestureDetector(
-    onTap: onTap,
-    child: Stack(
-      alignment: Alignment.topRight,
-      children: [
-        Container(
+  return Stack(
+    alignment: Alignment.topRight,
+    children: [
+      GestureDetector(
+        onTap: onTap,
+        child: Container(
           width: 40,
           height: 40,
           decoration: BoxDecoration(
@@ -559,28 +580,28 @@ Widget _smallIconInCyan(IconData icon, int badge, {VoidCallback? onTap}) {
           ),
           child: Center(child: Icon(icon, color: Colors.white, size: 18)),
         ),
-        if (badge > 0)
-          Positioned(
-            right: 2,
-            top: 2,
-            child: Container(
-              padding: const EdgeInsets.all(3),
-              decoration: const BoxDecoration(
-                color: Colors.red,
-                shape: BoxShape.circle,
-              ),
-              child: Text(
-                '$badge',
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 10,
-                  fontWeight: FontWeight.bold,
-                ),
+      ),
+      if (badge > 0)
+        Positioned(
+          right: 2,
+          top: 2,
+          child: Container(
+            padding: const EdgeInsets.all(3),
+            decoration: const BoxDecoration(
+              color: Colors.red,
+              shape: BoxShape.circle,
+            ),
+            child: Text(
+              '$badge',
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: 10,
+                fontWeight: FontWeight.bold,
               ),
             ),
           ),
-      ],
-    ),
+        ),
+    ],
   );
 }
 
@@ -895,7 +916,6 @@ class _Header extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const SizedBox(height: 8),
-                    // Replace text logo with image icon
                     Image.asset(
                       'assets/images/absenqu-icon.png',
                       height: 36,
@@ -909,26 +929,24 @@ class _Header extends StatelessWidget {
                         fontWeight: FontWeight.w700,
                       ),
                     ),
-                    SizedBox(height: 4),
-                    Text(
+                    const SizedBox(height: 4),
+                    const Text(
                       'NIP 1897819010001',
                       style: TextStyle(
                         fontSize: 12,
                         fontWeight: FontWeight.w600,
                       ),
                     ),
-                    SizedBox(height: 6),
-                    Text(
+                    const SizedBox(height: 6),
+                    const Text(
                       'Manajer IT &\nSoftware Development',
                       style: TextStyle(fontSize: 12),
                     ),
-                    SizedBox(height: 6),
-                    Text('Kantor Pusat', style: TextStyle(fontSize: 12)),
+                    const SizedBox(height: 6),
+                    const Text('Kantor Pusat', style: TextStyle(fontSize: 12)),
                   ],
                 ),
               ),
-
-              // profile image
               ClipRRect(
                 borderRadius: BorderRadius.circular(16),
                 child: Image.asset(
@@ -939,9 +957,7 @@ class _Header extends StatelessWidget {
               ),
             ],
           ),
-
           const SizedBox(height: 12),
-
           Row(
             children: [
               ElevatedButton.icon(
@@ -992,37 +1008,48 @@ class _InfoRow extends StatelessWidget {
           children: [
             Expanded(
               flex: 2,
-              child: Container(
-                padding: const EdgeInsets.all(12),
-                decoration: BoxDecoration(
-                  color: const Color(0xFFF7F4C6),
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const [
-                    Text(
-                      '01 April 2025 | 1 Syawal 1446 H',
-                      style: TextStyle(fontWeight: FontWeight.bold),
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) =>
+                          RundownScheduleScreen(day: DateTime.now()),
                     ),
-                    SizedBox(height: 8),
-                    Text('Waktu Saat ini', style: TextStyle(fontSize: 12)),
-                    SizedBox(height: 6),
-                    Text(
-                      '08.30',
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
+                  );
+                },
+                child: Container(
+                  padding: const EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFFF7F4C6),
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: const [
+                      Text(
+                        '01 April 2025 | 1 Syawal 1446 H',
+                        style: TextStyle(fontWeight: FontWeight.bold),
                       ),
-                    ),
-                    SizedBox(height: 6),
-                    Text('Senin', style: TextStyle(fontSize: 14)),
-                    SizedBox(height: 6),
-                    Text(
-                      'Morning Briefing\nRapat Target Marketing April',
-                      style: TextStyle(fontSize: 12),
-                    ),
-                  ],
+                      SizedBox(height: 8),
+                      Text('Waktu Saat ini', style: TextStyle(fontSize: 12)),
+                      SizedBox(height: 6),
+                      Text(
+                        '08.30',
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      SizedBox(height: 6),
+                      Text('Senin', style: TextStyle(fontSize: 14)),
+                      SizedBox(height: 6),
+                      Text(
+                        'Morning Briefing\nRapat Target Marketing April',
+                        style: TextStyle(fontSize: 12),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -1037,6 +1064,12 @@ class _InfoRow extends StatelessWidget {
                     time: '07.30',
                     status: 'SESUAI',
                     subtitle: 'Peraturan Absen Masuk\nSift 1 Pukul 08.00',
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (_) => AbsenMasukPage()),
+                      );
+                    },
                   ),
                   const SizedBox(height: 8),
                   _MiniCard(
@@ -1045,6 +1078,14 @@ class _InfoRow extends StatelessWidget {
                     time: '16.32',
                     status: 'SESUAI',
                     subtitle: 'Peraturan Absen Pulang\nSift 1 Pukul 16.30',
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => const AbsenPulangScreen(),
+                        ),
+                      );
+                    },
                   ),
                 ],
               ),
@@ -1062,6 +1103,7 @@ class _MiniCard extends StatelessWidget {
   final String time;
   final String status;
   final String subtitle;
+  final VoidCallback? onTap;
 
   const _MiniCard({
     required this.color,
@@ -1069,38 +1111,45 @@ class _MiniCard extends StatelessWidget {
     required this.time,
     required this.status,
     required this.subtitle,
+    this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(10),
-      decoration: BoxDecoration(
-        color: color,
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(title, style: const TextStyle(fontWeight: FontWeight.bold)),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  Text(
-                    time,
-                    style: const TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                  Text(status, style: const TextStyle(fontSize: 12)),
-                ],
-              ),
-            ],
-          ),
-          const SizedBox(height: 6),
-          Text(subtitle, style: const TextStyle(fontSize: 11)),
-        ],
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        padding: const EdgeInsets.all(10),
+        decoration: BoxDecoration(
+          color: color,
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  title,
+                  style: const TextStyle(fontWeight: FontWeight.bold),
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    Text(
+                      time,
+                      style: const TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    Text(status, style: const TextStyle(fontSize: 12)),
+                  ],
+                ),
+              ],
+            ),
+            const SizedBox(height: 6),
+            Text(subtitle, style: const TextStyle(fontSize: 11)),
+          ],
+        ),
       ),
     );
   }

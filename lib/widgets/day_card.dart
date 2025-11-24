@@ -5,6 +5,7 @@ class DayCard extends StatelessWidget {
   final String dayNum;
   final bool isSelected;
   final VoidCallback onTap;
+  final Color? selectedColor;
 
   const DayCard({
     super.key,
@@ -12,12 +13,13 @@ class DayCard extends StatelessWidget {
     required this.dayNum,
     required this.isSelected,
     required this.onTap,
+    this.selectedColor,
   });
 
   @override
   Widget build(BuildContext context) {
     final Color base = isSelected
-        ? const Color(0xFFEFF4A8)
+        ? (selectedColor ?? const Color(0xFFEFF4A8))
         : const Color(0xFFCDEFF1);
     return GestureDetector(
       onTap: onTap,
