@@ -31,7 +31,6 @@ dependencies:
   flutter:
     sdk: flutter
 
-
     # The following adds the Cupertino Icons font to your application.
     # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.8
@@ -65,7 +64,6 @@ dev_dependencies:
   flutter_native_splash: ^2.4.0
   flutter_launcher_icons: ^0.13.1
   flutter_lints: ^6.0.0
-
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -114,10 +112,12 @@ flutter:
   # see https://flutter.dev/to/font-from-package
 flutter_native_splash:
   color: "#93FFFA"
-  image: assets/images/absenqu-icon.png
+  image: assets/images/absenqu-icon_padded.png
+  android_gravity: center
+  ios_content_mode: scaleAspectFit
   android_12:
     color: "#93FFFA"
-    image: assets/images/absenqu-icon.png
+    image: assets/images/absenqu-icon_padded.png
   android: true
   ios: true
   web: false
@@ -125,17 +125,18 @@ flutter_native_splash:
 flutter_launcher_icons:
   android: true
   ios: true
-  image_path: assets/images/absenqu-icon.png
-  adaptive_icon_background: "#93FFFA"
-  adaptive_icon_foreground: assets/images/absenqu-icon.png
+  image_path: assets/images/absenqu-icon_padded.png
+  adaptive_icon_background: "#FFFFFF"
+
+  adaptive_icon_foreground: assets/images/absenqu-icon_padded.png
   remove_alpha_ios: true
   min_sdk_android: 21
   windows:
     generate: true
-    image_path: assets/images/absenqu-icon.png
+    image_path: assets/images/absenqu-icon_padded.png
   web:
     generate: true
-    image_path: assets/images/absenqu-icon.png
+    image_path: assets/images/absenqu-icon_padded.png
   macos:
     generate: true
-    image_path: assets/images/absenqu-icon.png
+    image_path: assets/images/absenqu-icon_padded.png
