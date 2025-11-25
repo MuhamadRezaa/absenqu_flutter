@@ -1,8 +1,11 @@
 import 'dart:typed_data';
+import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:flutter_map/flutter_map.dart';
+import 'package:latlong2/latlong.dart' show LatLng;
 import '../../utils/date_time_labels.dart';
 import 'dart:async';
 
@@ -386,21 +389,46 @@ class _UploadBox extends StatelessWidget {
                         child: images.length == 1
                             ? Row(
                                 children: [
-                                  AspectRatio(
-                                    aspectRatio: 4 / 3,
-                                    child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(12),
-                                      child: Image.memory(images.first, fit: BoxFit.cover),
+                                  Expanded(
+                                    child: AspectRatio(
+                                      aspectRatio: 4 / 3,
+                                      child: ClipRRect(
+                                        borderRadius: BorderRadius.circular(12),
+                                        child: Image.memory(images.first, fit: BoxFit.cover),
+                                      ),
                                     ),
                                   ),
                                   const SizedBox(width: 12),
                                   (latitude != null && longitude != null)
-                                      ? ClipRRect(
-                                          borderRadius: BorderRadius.circular(12),
-                                          child: SizedBox(
-                                            width: 140,
-                                            height: 80,
-                                            child: Image.network(_buildStaticMapUrl(latitude!, longitude!), fit: BoxFit.cover, errorBuilder: (ctx, err, stack) => Container(color: Colors.white.withOpacity(0.85), alignment: Alignment.center, child: const Icon(Icons.location_on, color: Color(0xFF3D6E63))),),
+                                      ? Expanded(
+                                          child: AspectRatio(
+                                            aspectRatio: 4 / 3,
+                                            child: ClipRRect(
+                                              borderRadius: BorderRadius.circular(12),
+                                              child: FlutterMap(
+                                                options: MapOptions(
+                                                  initialCenter: LatLng(latitude!, longitude!),
+                                                  initialZoom: 16,
+                                                  interactionOptions: const InteractionOptions(flags: InteractiveFlag.none),
+                                                ),
+                                                children: [
+                                                  TileLayer(
+                                                    urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+                                                    userAgentPackageName: 'com.example.absenqu_flutter',
+                                                  ),
+                                                  MarkerLayer(
+                                                    markers: [
+                                                      Marker(
+                                                        point: LatLng(latitude!, longitude!),
+                                                        width: 36,
+                                                        height: 36,
+                                                        child: const Icon(Icons.location_pin, color: Colors.redAccent, size: 32),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
                                           ),
                                         )
                                       : GestureDetector(
@@ -443,10 +471,19 @@ class _UploadBox extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 6),
-        const Text(
-          'Upload Bukti Chalange',
-          style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
-        ),
+        if (hasImages && latitude != null && longitude != null)
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: const [
+              Text('Ambil Bukti Foto', style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600)),
+              Text('Lokasi Anda Saat Ini', style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600)),
+            ],
+          )
+        else
+          const Text(
+            'Upload Bukti Chalange',
+            style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
+          ),
       ],
     );
   }
@@ -463,8 +500,8 @@ class _DashedRectPainter extends CustomPainter {
     const dashWidth = 6.0;
     const dashSpace = 4.0;
 
-    void drawDashedPath(Path source) {
-      final Path path = Path();
+    void drawDashedPath(ui.Path source) {
+      final ui.Path path = ui.Path();
       for (final metric in source.computeMetrics()) {
         double distance = 0.0;
         while (distance < metric.length) {
@@ -476,7 +513,7 @@ class _DashedRectPainter extends CustomPainter {
       canvas.drawPath(path, paint);
     }
 
-    final Path rectPath = Path()..addRect(rect);
+    final ui.Path rectPath = ui.Path()..addRect(rect);
     drawDashedPath(rectPath);
   }
 

@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:absenqu_flutter/screens/reimburse/reimburse_process_page.dart';
 import 'dart:typed_data';
+import 'package:absenqu_flutter/utils/date_time_labels.dart';
+import 'package:hijri/hijri_calendar.dart';
+import 'dart:async';
 
 class ReimburseFormScreen extends StatefulWidget {
   const ReimburseFormScreen({super.key});
@@ -18,6 +21,8 @@ class _ReimburseFormScreenState extends State<ReimburseFormScreen> {
   final TextEditingController detailCtrl = TextEditingController();
   final ImagePicker _picker = ImagePicker();
   List<Uint8List> _images = [];
+  late DateTime _now;
+  Timer? _timer;
 
   Future<void> _pickImages() async {
     try {
@@ -51,12 +56,22 @@ class _ReimburseFormScreenState extends State<ReimburseFormScreen> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    _now = DateTime.now();
+    _timer = Timer.periodic(const Duration(minutes: 1), (_) {
+      setState(() => _now = DateTime.now());
+    });
+  }
+
+  @override
   void dispose() {
     categoryCtrl.dispose();
     amountCtrl.dispose();
     accountCtrl.dispose();
     bankCtrl.dispose();
     detailCtrl.dispose();
+    _timer?.cancel();
     super.dispose();
   }
 
@@ -89,20 +104,20 @@ class _ReimburseFormScreenState extends State<ReimburseFormScreen> {
                             Expanded(
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
-                                children: const [
+                                children: [
                                   Row(
                                     children: [
-                                      _HeaderItem(label: '31 Maret\n2025'),
-                                      SizedBox(width: 12),
-                                      _HeaderDivider(),
-                                      SizedBox(width: 12),
-                                      _HeaderItem(label: '1 Syawal\n1446 H'),
+                                      _HeaderItem(label: IndoDateTimeLabels.tanggalPanjang(_now)),
+                                      const SizedBox(width: 12),
+                                      const _HeaderDivider(),
+                                      const SizedBox(width: 12),
+                                      _HeaderItem(label: '${HijriCalendar.fromDate(_now).hDay} ${HijriCalendar.fromDate(_now).longMonthName}\n${HijriCalendar.fromDate(_now).hYear} H'),
                                     ],
                                   ),
-                                  SizedBox(height: 8),
+                                  const SizedBox(height: 8),
                                   Text(
-                                    'Today, Senin',
-                                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                                    'Today, ${IndoDateTimeLabels.hari(_now)}',
+                                    style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
                                   ),
                                 ],
                               ),
@@ -110,7 +125,7 @@ class _ReimburseFormScreenState extends State<ReimburseFormScreen> {
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.end,
                               children: [
-                                const _HeaderItem(label: '07.35 WIB'),
+                                _HeaderItem(label: IndoDateTimeLabels.jamWIB(_now)),
                                 IconButton(
                                   icon: const Icon(Icons.arrow_back, size: 20),
                                   color: Colors.black87,
@@ -157,7 +172,23 @@ class _ReimburseFormScreenState extends State<ReimburseFormScreen> {
                             ),
                             const SizedBox(height: 16),
                             GestureDetector(
-                              onTap: _pickImages,
+                              onTap: () async {
+                                try {
+                                  final file = await _picker.pickImage(
+                                    source: ImageSource.camera,
+                                    imageQuality: 85,
+                                    preferredCameraDevice: CameraDevice.rear,
+                                  );
+                                  if (file == null) return;
+                                  final bytes = await file.readAsBytes();
+                                  setState(() {
+                                    final combined = <Uint8List>[..._images, bytes];
+                                    _images = combined.length <= 2
+                                        ? combined
+                                        : combined.sublist(combined.length - 2);
+                                  });
+                                } catch (_) {}
+                              },
                               child: _UploadBox(images: _images),
                             ),
                             const SizedBox(height: 8),

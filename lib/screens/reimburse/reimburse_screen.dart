@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:absenqu_flutter/screens/reimburse/reimburse_form_screen.dart';
+import 'package:absenqu_flutter/utils/date_time_labels.dart';
+import 'package:hijri/hijri_calendar.dart';
+import 'dart:async';
 
 class ReimburseScreen extends StatelessWidget {
   const ReimburseScreen({super.key});
@@ -33,11 +36,39 @@ class ReimburseScreen extends StatelessWidget {
   }
 }
 
-class _Header extends StatelessWidget {
+class _Header extends StatefulWidget {
   const _Header();
+  @override
+  State<_Header> createState() => _HeaderState();
+}
+
+class _HeaderState extends State<_Header> {
+  late DateTime _now;
+  Timer? _timer;
+
+  @override
+  void initState() {
+    super.initState();
+    _now = DateTime.now();
+    _timer = Timer.periodic(const Duration(minutes: 1), (_) {
+      setState(() => _now = DateTime.now());
+    });
+  }
+
+  @override
+  void dispose() {
+    _timer?.cancel();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
+    final tanggal = IndoDateTimeLabels.tanggalPanjang(_now);
+    final hari = IndoDateTimeLabels.hari(_now);
+    final jam = IndoDateTimeLabels.jamWIB(_now);
+    final hijri = HijriCalendar.fromDate(_now);
+    final hijriLabel = '${hijri.hDay} ${hijri.longMonthName}\n${hijri.hYear} H';
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: Column(
@@ -45,25 +76,21 @@ class _Header extends StatelessWidget {
         children: [
           Row(
             children: [
-              const _HeaderItem(label: '31 Maret\n2025'),
+              _HeaderItem(label: '$tanggal'),
               const SizedBox(width: 12),
-              Container(
-                width: 1.5,
-                height: 36,
-                color: Colors.black.withOpacity(0.35),
-              ),
+              Container(width: 1.5, height: 36, color: Colors.black.withOpacity(0.35)),
               const SizedBox(width: 12),
-              const _HeaderItem(label: '1 Syawal\n1446 H'),
+              _HeaderItem(label: hijriLabel),
               const Spacer(),
-              const _HeaderItem(label: '07.35 WIB'),
+              _HeaderItem(label: jam),
             ],
           ),
           const SizedBox(height: 12),
           Row(
             children: [
-              const Text(
-                'Today, Senin',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+              Text(
+                'Today, $hari',
+                style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
               ),
               const Spacer(),
               IconButton(

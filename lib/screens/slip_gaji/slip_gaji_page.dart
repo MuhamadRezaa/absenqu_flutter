@@ -2,9 +2,34 @@ import 'package:flutter/material.dart';
 import 'package:printing/printing.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:pdf/pdf.dart' as pdf;
+import 'package:absenqu_flutter/utils/date_time_labels.dart';
+import 'dart:async';
 
-class SlipGajiPage extends StatelessWidget {
+class SlipGajiPage extends StatefulWidget {
   const SlipGajiPage({super.key});
+
+  @override
+  State<SlipGajiPage> createState() => _SlipGajiPageState();
+}
+
+class _SlipGajiPageState extends State<SlipGajiPage> {
+  late DateTime _now;
+  Timer? _timer;
+
+  @override
+  void initState() {
+    super.initState();
+    _now = DateTime.now();
+    _timer = Timer.periodic(const Duration(minutes: 1), (_) {
+      setState(() => _now = DateTime.now());
+    });
+  }
+
+  @override
+  void dispose() {
+    _timer?.cancel();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,24 +48,40 @@ class SlipGajiPage extends StatelessWidget {
             children: [
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-                child: Row(
+                child: Column(
                   children: [
-                    Row(children: [
-                      CircleAvatar(
-                        radius: 16,
-                        backgroundColor: Colors.white,
-                        backgroundImage: const AssetImage('assets/images/splash-image.png'),
-                      ),
-                      const SizedBox(width: 8),
-                      const Text('Slip Gaji Anda', style: TextStyle(fontWeight: FontWeight.w800)),
-                    ]),
-                    const Spacer(),
-                    IconButton(
-                      onPressed: () {
-                        if (Navigator.canPop(context)) Navigator.pop(context);
-                      },
-                      icon: const Icon(Icons.arrow_back, color: Colors.black87),
-                    )
+                    Row(
+                      children: [
+                        Row(children: [
+                          CircleAvatar(
+                            radius: 16,
+                            backgroundColor: Colors.white,
+                            backgroundImage: const AssetImage('assets/images/splash-image.png'),
+                          ),
+                          const SizedBox(width: 8),
+                          const Text('Slip Gaji Anda', style: TextStyle(fontWeight: FontWeight.w800)),
+                        ]),
+                        const Spacer(),
+                        IconButton(
+                          onPressed: () {
+                            if (Navigator.canPop(context)) Navigator.pop(context);
+                          },
+                          icon: const Icon(Icons.arrow_back, color: Colors.black87),
+                        )
+                      ],
+                    ),
+                    const SizedBox(height: 8),
+                    Row(
+                      children: [
+                        Text(IndoDateTimeLabels.tanggalPanjang(_now), style: const TextStyle(fontWeight: FontWeight.w600)),
+                        const SizedBox(width: 12),
+                        Container(width: 1.5, height: 20, color: Colors.black.withOpacity(0.35)),
+                        const SizedBox(width: 12),
+                        Text('Today, ${IndoDateTimeLabels.hari(_now)}', style: const TextStyle(fontWeight: FontWeight.w600)),
+                        const Spacer(),
+                        Text(IndoDateTimeLabels.jamWIB(_now), style: const TextStyle(fontWeight: FontWeight.w600)),
+                      ],
+                    ),
                   ],
                 ),
               ),

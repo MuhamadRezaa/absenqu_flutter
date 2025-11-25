@@ -3,6 +3,8 @@ import 'dart:typed_data';
 import '../olahraga/olahraga_challenge_model.dart';
 import '../../utils/date_time_labels.dart';
 import 'dart:async';
+import 'package:flutter_map/flutter_map.dart';
+import 'package:latlong2/latlong.dart' show LatLng;
 
 const String gmapsStaticApiKey = String.fromEnvironment('GMAPS_STATIC_KEY', defaultValue: '');
 String _staticMapUrl(double lat, double lng) {
@@ -71,14 +73,28 @@ class _MapThumb extends StatelessWidget {
         aspectRatio: 1.2,
         child: ClipRRect(
           borderRadius: BorderRadius.circular(12),
-          child: Image.network(
-            _staticMapUrl(latitude, longitude),
-            fit: BoxFit.cover,
-            errorBuilder: (ctx, err, stack) => Container(
-              color: Colors.white,
-              alignment: Alignment.center,
-              child: const Icon(Icons.location_on),
+          child: FlutterMap(
+            options: MapOptions(
+              initialCenter: LatLng(latitude, longitude),
+              initialZoom: 16,
+              interactionOptions: const InteractionOptions(flags: InteractiveFlag.none),
             ),
+            children: [
+              TileLayer(
+                urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+                userAgentPackageName: 'com.example.absenqu_flutter',
+              ),
+              MarkerLayer(
+                markers: [
+                  Marker(
+                    point: LatLng(latitude, longitude),
+                    width: 36,
+                    height: 36,
+                    child: const Icon(Icons.location_pin, color: Colors.redAccent, size: 30),
+                  ),
+                ],
+              ),
+            ],
           ),
         ),
       ),
